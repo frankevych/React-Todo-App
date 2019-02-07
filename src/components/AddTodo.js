@@ -8,8 +8,10 @@ export class AddTodo extends Component {
             title: ''
         }
     }
+    // user input is setting directly to title state. 
     handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
-    //onSubmitHandler since its Submit event , it will try to submit to an actual file so we wanna e.prevetDefault
+
+    // onSubmit we are passing addTodo function with title state to app.js where it will be handled., and after clear title state.
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.addTodo(this.state.title);
@@ -25,10 +27,7 @@ export class AddTodo extends Component {
                         type="text" 
                         name="title" 
                         placeholder="Add steps ..."
-                        //value without onChange - error cause it should be handled
-                        //value attribute triggeres onchange event, thats why we should create eventhandler
                         value={this.state.title} 
-                        //thats why we created function called handleChange - to handle Event
                         onChange={this.handleChange}
                     />
                 </div>

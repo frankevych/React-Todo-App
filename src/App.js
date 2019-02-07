@@ -17,16 +17,14 @@ class App extends Component {
       }
   }
 
-  //simulates work with db. (json placeholder)
-  //componentDidMount lifecycle method, wich will run right after the component is Mounted
+  //fetch 10 todos, from json placeholder, and render them by default.
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-      //gives us a response (res) and then it has a data property attached so it will be res.data (arr)
+    axios.get('https://jsonplaceholder.typicode.com/todos')
       .then(res => this.setState({ todos: res.data }))
-      console.log(this.state.todos)
   }
 
-  handleClick = (id) => {
+  //toggle todo, if its not completed set to completed, & vice versa
+  handleToggle = (id) => {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.completed = !todo.completed
@@ -35,18 +33,16 @@ class App extends Component {
     }) });
   }
 
-  //we need to manipulate our state by removing one of these todos, 
-  //and the way we gonna do this is with the filter method its highordered array method
-  //it loops through and based on the conditions it will return another array
+//find todo by id, and delet it with filter method
   delTodo = (id) => {
     axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
-  // {todos} = ['...'- copies new array.filtered(with todo's that are not matching id in param.of func)] 
   }
 
-  //add todo
+  //add todo, !here i got problem, every single todo is added to json place holder has same id 201 
+  //( 201 cause there are 200todos in that placeholder. i tried to create function that would increment next todo's id,
+  // and then post todo with unique id, but it gives me error of 404 )
    addTodo = (title) => {
-  //gives us a response (res) and then it has a data property attached so it will be res.data (arr)
       axios.post(`https://jsonplaceholder.typicode.com/todos`, {
         title,
         completed: false,
@@ -57,8 +53,6 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="App">
-        
         <div className="container">
           <Header />
           <Route exact path="/" render={props => (
@@ -66,14 +60,13 @@ class App extends Component {
               <AddTodo addTodo={this.addTodo} />
               <Todos 
                 todos={this.state.todos} 
-                onClick={this.handleClick} 
+                onToggle={this.handleToggle} 
                 delTodo={this.delTodo}
               />
               <Footer />
            </React.Fragment>
           )} />
           <Route path="/about" component={About} />
-        </div>
         </div>
       </Router>
     );
