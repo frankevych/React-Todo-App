@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export class AddTodo extends Component {
-    constructor(props){
-        super(props)
-        this.state = {
-            title: ''
-        }
+    state = {
+        title: ''
     }
     // user input is setting directly to title state. 
     handleChange = (e) => this.setState({ [e.target.name]: e.target.value });
