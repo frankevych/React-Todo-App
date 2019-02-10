@@ -5,9 +5,8 @@ import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/about';
 import Footer from './layout/Footer'
-import axiosInstance from './api/axios-base';
 import './App.css';
-import {getTodos, deleteTodo} from './api/todos';
+import {getTodos, deleteTodo, newTodo} from './api/todos';
 
 class App extends Component {
 
@@ -41,10 +40,7 @@ class App extends Component {
 
   //add todo, !here i got problem, every single todo is added to json place holder has same id 201 
    addTodo = (title) => {
-      axiosInstance.post(`/todos`, {
-        title,
-        completed: false,
-      })
+      newTodo()
       .then(res => this.setState({ todos: [...this.state.todos, res.data] }));
     }
 
