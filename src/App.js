@@ -5,21 +5,19 @@ import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/about';
 import Footer from './layout/Footer'
-import axios from 'axios';
+import axiosInstance from './api/axios-base';
 import './App.css';
+import {getTodos, deleteTodo} from './api/todos';
 
 class App extends Component {
 
-  constructor(props){
-    super(props)
-      this.state = {
-        todos: [],
-      }
-  }
+    state = {
+      todos: [],
+    }
 
   //fetch 10 todos, from json placeholder, and render them by default.
   componentDidMount() {
-    axios.get('https://jsonplaceholder.typicode.com/todos')
+    getTodos()
       .then(res => this.setState({ todos: res.data }))
   }
 
@@ -28,22 +26,22 @@ class App extends Component {
     this.setState({ todos: this.state.todos.map(todo => {
       if(todo.id === id) {
         todo.completed = !todo.completed
+        
       }
       return todo;
     }) });
   }
 
+
 //find todo by id, and delet it with filter method
   delTodo = (id) => {
-    axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+    deleteTodo(id)
       .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
   }
 
   //add todo, !here i got problem, every single todo is added to json place holder has same id 201 
-  //( 201 cause there are 200todos in that placeholder. i tried to create function that would increment next todo's id,
-  // and then post todo with unique id, but it gives me error of 404 )
    addTodo = (title) => {
-      axios.post(`https://jsonplaceholder.typicode.com/todos`, {
+      axiosInstance.post(`/todos`, {
         title,
         completed: false,
       })

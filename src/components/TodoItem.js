@@ -19,8 +19,8 @@ export class TodoItem extends Component {
         <div className="alert alert-info" style={this.getStyle()}>
           <button className="btn btn-success" onClick={this.props.onToggle.bind(this, id)}> status </button> {' '} 
           { title }                      
-            <button className="btn btn-info pull-right" onClick={this.props.delTodo.bind(this, id)}> remove </button>
-            <AddTimer completed={completed} />
+          <button className="btn btn-info pull-right" onClick={this.props.delTodo.bind(this, id)}> remove </button>
+          <AddTimer completed={completed} />
         </div>
       </div>
     )
