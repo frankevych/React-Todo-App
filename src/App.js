@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {Header} from './layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
-import {About} from './components/pages/about';
+import {About} from './components/routes/about';
+import {Error} from './components/routes/error';
 import {Footer} from './layout/Footer'
 import './App.css';
 import {getTodos, deleteTodo, newTodo} from './api/todos';
@@ -46,25 +47,26 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div className="container">
-          <Header />
-          <Route exact path="/" render={props => (
-            <React.Fragment>
-              <AddTodo addTodo={this.addTodo} />
-              <Todos 
-                todos={this.state.todos} 
-                onToggle={this.handleToggle} 
-                delTodo={this.delTodo}
-              />
-              <Footer />
-           </React.Fragment>
-          )} />
-          <Route path="/about" component={About} />
-        </div>
+          <div className="container">
+            <Header />
+             <Switch>
+              <Route exact path="/" render={props => (
+                <React.Fragment>
+                  <AddTodo addTodo={this.addTodo} />
+                  <Todos 
+                    todos={this.state.todos} 
+                    onToggle={this.handleToggle} 
+                    delTodo={this.delTodo}
+                  />
+                  <Footer />
+                </React.Fragment>
+              )} />
+              <Route path="/about" component={About} />
+              <Route component={Error} />
+            </Switch>
+          </div>
       </Router>
     );
   }
 }
-
-
 export default App;
