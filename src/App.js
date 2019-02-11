@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './layout/Header';
+import {Header} from './layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
-import About from './components/pages/about';
-import Footer from './layout/Footer'
+import {About} from './components/pages/about';
+import {Footer} from './layout/Footer'
 import './App.css';
 import {getTodos, deleteTodo, newTodo} from './api/todos';
 
@@ -39,7 +39,7 @@ class App extends Component {
 
   //add todo, !here i got problem, every single todo is added to json place holder has same id 201 
    addTodo = (title) => {
-      newTodo()
+      newTodo(title)
       .then(res => this.setState({ todos: [...this.state.todos, res.data] }));
     }
 

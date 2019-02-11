@@ -21,9 +21,29 @@ a {
    justify-content: space-between
  }
 
+ .header-style {
+  background: #F4F6F6;
+  color: #AED6F1;
+  text-align: center;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.header-style h1 {
+  font-weight: 700;
+}
+
+.footer-style {
+  margin: 2em;
+  font-weight: 200;
+  text-align: center;
+  color: #D6DBDF;
+}
+
+
+
 @media (max-width: 768px) {
   .alert {
-    display: flex;
     flex-direction: column;
     justify-content: center
   }

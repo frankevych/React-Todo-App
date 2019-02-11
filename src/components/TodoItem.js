@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import AddTimer from './AddTimer'
 
 export class TodoItem extends Component {
-
-  //dynamic styling for todo, based on completed status.
   getStyle = () => {
     return {
       backgroundColor: this.props.todo.completed ? '#DAF7A6' : '',
