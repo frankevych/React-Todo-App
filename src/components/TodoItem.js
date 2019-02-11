@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import AddTimer from './AddTimer'
 
 export class TodoItem extends Component {
+  
   getStyle = () => {
     return {
       backgroundColor: this.props.todo.completed ? '#DAF7A6' : '',
     }
   }
-  //TodoItem passing onToggle, deleteTodo functions to be handled in App.js
+
   render() {
     const {id, title, completed} = this.props.todo
     return (

@@ -12,6 +12,7 @@ a {
   color: #333;
   text-decoration: none;
 }
+
  .todo-p {
    width: 70%;
  }
@@ -39,8 +40,6 @@ a {
   text-align: center;
   color: #D6DBDF;
 }
-
-
 
 @media (max-width: 768px) {
   .alert {

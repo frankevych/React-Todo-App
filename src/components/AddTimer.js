@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 export class AddTimer extends Component {
+
     constructor(props) {
         super(props)
         this.state = {
@@ -16,24 +17,25 @@ export class AddTimer extends Component {
     // before deleting todo we need to clearInterval()? but how to perform it?
     handleSubmit = (e) => {
         e.preventDefault();
+        const {counter, seconds, minutes, hours} = this.state
         //check if counter is false (need conter to prevent bug with multiple clicks, which will case multiplying work of this function on the same timer.)
-        if(this.state.counter === false) {
+        if(counter === false) {
             //if false, set it to true
-            this.setState({ counter: !this.state.counter })
+            this.setState({ counter: !counter })
             //every 1000ms
             setInterval(() => {
                 //check if todo is not completed (see PropTypes below)(if false keep working)
                 if(this.props.completed === false){
                     //when timer reaches 60 seconds
-                    if(this.state.seconds === 60){
-                        this.setState({ seconds: 0, minutes: this.state.minutes + 1 })
+                    if(seconds === 60){
+                        this.setState({ seconds: 0, minutes: minutes + 1 })
                     }
-                    if(this.state.minutes === 60){
+                    if(minutes === 60){
                         //same as with seconds above
-                        this.setState({ minutes: 0, hours: this.state.hours + 1 });
+                        this.setState({ minutes: 0, hours: hours + 1 });
                     }
                     //increment every 1000ms state.second +1
-                    this.setState({ seconds: this.state.seconds +1 })
+                    this.setState({ seconds: seconds +1 })
                  } else {
                      clearInterval()
                  }
@@ -41,9 +43,8 @@ export class AddTimer extends Component {
         }
     }
 
-
     render() {
-        const {seconds, minutes, hours} = this.state
+    const {seconds, minutes, hours} = this.state
         return (
             <button 
                 className="btn btn-secondary pull-right" 
@@ -54,6 +55,7 @@ export class AddTimer extends Component {
         )        
     }
 }
+
 AddTimer.propTypes = {
     completed: PropTypes.bool.isRequired
 }
