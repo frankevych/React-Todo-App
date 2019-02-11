@@ -8,19 +8,20 @@ export class TodoItem extends Component {
   getStyle = () => {
     return {
       backgroundColor: this.props.todo.completed ? '#DAF7A6' : '',
-      textDecoration: this.props.todo.completed ? 'line-through' : 'none'
     }
   }
   //TodoItem passing onToggle, deleteTodo functions to be handled in App.js
   render() {
     const {id, title, completed} = this.props.todo
     return (
-      <div className="list-group list-group-flush">
+      <div className="list-group">
         <div className="alert alert-info" style={this.getStyle()}>
-          <button className="btn btn-success" onClick={this.props.onToggle.bind(this, id)}> status </button> {' '} 
-          { title }                      
-          <button className="btn btn-info pull-right" onClick={this.props.delTodo.bind(this, id)}> remove </button>
-          <AddTimer completed={completed} />
+          <p className="todo-p">{ title }</p>   
+          <div className="btn-group">
+            <button className="btn btn-success" onClick={this.props.onToggle.bind(this, id)}> check </button> {' '} 
+            <AddTimer completed={completed} />
+            <button className="btn btn-info" onClick={this.props.delTodo.bind(this, id)}> X </button>
+          </div>                   
         </div>
       </div>
     )

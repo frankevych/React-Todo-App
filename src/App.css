@@ -1,7 +1,6 @@
 * {
   box-sizing: border-box;
   margin: 0;
-  font-weight: bold;
 }
 
 body {
@@ -13,11 +12,25 @@ a {
   color: #333;
   text-decoration: none;
 }
+ .todo-p {
+   width: 70%;
+ }
 
-.pull-right{
-  float: right;
-}
+ .alert {
+   display: flex;
+   justify-content: space-between
+ }
 
-.btn {
- margin: 1em;
+@media (max-width: 768px) {
+  .alert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+  }
+   .btn-group {
+    padding: 0;
+   }
+   .todo-p {
+    width: 100%;
+  }
 }
