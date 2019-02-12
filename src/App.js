@@ -23,24 +23,36 @@ class App extends Component {
 
 //toggle todo, if its not completed set to completed, & vice versa
   handleToggle = (id) => {
-    this.setState({ todos: this.state.todos.map(todo => {
-      if(todo.id === id) {
-        todo.completed = !todo.completed
+    this.setState((prevState) => { 
+      return { 
+        todos: prevState.todos.map(todo => {
+          if(todo.id === id) {
+            todo.completed = !todo.completed
+          }
+          return todo;
+        }) 
       }
-      return todo;
-    }) });
+    });
   }
 
-//find todo by id, and delet it with filter method
+//find todo by id, and delete it with filter method
   delTodo = (id) => {
     deleteTodo(id)
-      .then(res => this.setState({ todos: [...this.state.todos.filter(todo => todo.id !== id)] }))
+      .then(res => this.setState((prevState) => { 
+        return {
+          todos: [...prevState.todos.filter(todo => todo.id !== id)] 
+        };
+      }));
   }
 
 //add todo, !here i got problem, every single todo is added to json place holder has same id 201 
   addTodo = (title) => {
     newTodo(title)
-    .then(res => this.setState({ todos: [...this.state.todos, res.data] }));
+    .then(res => this.setState((prevState) => {
+      return {
+        todos: [...prevState.todos, res.data] 
+      }
+    }));  
   }
 
   render() {

@@ -5,12 +5,7 @@ import '../App.css'
 
 export class TodoItem extends Component {
   
-  // getStyle = () => {
-  //   return {
-  //     backgroundColor: this.props.todo.completed ? '#DAF7A6' : '',
-  //   }
-  // }
-  todoComplited = () => {
+  todoCompleted = () => {
     return this.props.todo.completed ? ' todo-done' : ' todo-undone'
   }
 
@@ -18,10 +13,12 @@ export class TodoItem extends Component {
     const {id, title, completed} = this.props.todo
     return (
       <div className="list-group">
-        <div className= { `alert alert-info ${this.todoComplited()}` }>
-          <p className="todo-p">{ title }</p>   
+        <div className= { `alert alert-info ${this.todoCompleted()}` }>
+          <div className="todo-div">
+            {title}
+          </div>   
           <div className="btn-group">
-            <button className="btn btn-success" onClick={this.props.onToggle.bind(this, id)}> check </button> {' '} 
+            <button className="btn btn-success" onClick={this.props.onToggle.bind(this, id)}> check </button>
             <AddTimer completed={completed} />
             <button className="btn btn-info" onClick={this.props.delTodo.bind(this, id)}> X </button>
           </div>                   
@@ -34,6 +31,9 @@ export class TodoItem extends Component {
 TodoItem.propTypes = {
   todo: PropTypes.object.isRequired,
   onToggle: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired
+  delTodo: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  completed: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
 }
 export default TodoItem
