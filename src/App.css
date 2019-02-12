@@ -41,6 +41,13 @@ a {
   color: #D6DBDF;
 }
 
+.todo-done {
+  background-color: #DAF7A6;
+}
+.todo-undone {
+  background-color: #d1ecf1;
+}
+
 @media (max-width: 768px) {
   .alert {
     flex-direction: column;

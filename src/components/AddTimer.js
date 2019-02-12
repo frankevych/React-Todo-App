@@ -37,7 +37,7 @@ export class AddTimer extends Component {
                     //increment every 1000ms state.second +1
                     this.setState({ seconds: seconds +1 })
                  } else {
-                     clearInterval()
+                     //clearInterval()
                  }
             }, 1000);
         }
@@ -49,8 +49,10 @@ export class AddTimer extends Component {
             <button 
                 className="btn btn-secondary pull-right" 
                 onClick={this.handleSubmit}
-            >
-                {hours} : {minutes} : {seconds}
+            >   
+                <p className="p-0 m-0">
+                    {hours} : {minutes} : {seconds}
+                </p>
             </button>
         )        
     }
