@@ -15,7 +15,7 @@ class App extends Component {
     todos: [],
   }
 
-//fetch 10 todos, from json placeholder, and render them by default.
+//fetch  todos from json placeholder, and render them by default.
   componentDidMount() {
     getTodos()
       .then(res => this.setState({ todos: res.data }))
